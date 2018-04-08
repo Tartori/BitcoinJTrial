@@ -5,10 +5,7 @@ import org.bitcoinj.core.Context;
 import org.bitcoinj.utils.BlockFileLoader;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Hello world!
@@ -27,22 +24,32 @@ public class App
         List<File> files = getFiles();
         AbstractBitcoinNetParams params = new TestNet3Params();
         Context.getOrCreate(params);
-        for(File f : files)
-        {
-            System.out.println(f.getName());
-            List<String> hashes = new LinkedList<>();
-            BlockFileLoader fl = new BlockFileLoader(params, Collections.singletonList(f));
-            for (Block blk : fl) {
-                hashes.add(blk.getHashAsString());
-            }
+        Date time = new Date();
+        int i = 0;
+        try {
+            for (File f : files) {
+                System.out.println(f.getName());
+                BlockFileLoader fl = new BlockFileLoader(params, Collections.singletonList(f));
+                for (Block blk : fl) {
+                    i++;
+                    time=blk.getTime();
+                }
+                System.out.println(i);
+                System.out.println(time);
 
+            }
+        }
+        catch (Exception ex){
+            System.out.println(i);
+            System.out.println(time);
+            System.out.println(ex.toString());
         }
     }
 
     private List<File> getFiles(){
         List<File>files = new ArrayList<>();
         try {
-            File folder = new File("D:\\btc\\data\\testnet3\\blocks");
+            File folder = new File("D:\\btc160\\data\\blocks");
             File[] listOfFiles = folder.listFiles();
             if(listOfFiles==null)return files;
 
