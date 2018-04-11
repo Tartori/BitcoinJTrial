@@ -22,7 +22,7 @@ public class App
 
     private void trial(){
         List<File> files = getFiles();
-        AbstractBitcoinNetParams params = new TestNet3Params();
+        AbstractBitcoinNetParams params = new MainNetParams();
         Context.getOrCreate(params);
         Date time = new Date();
         int i = 0;
@@ -43,13 +43,14 @@ public class App
             System.out.println(i);
             System.out.println(time);
             System.out.println(ex.toString());
+            ex.printStackTrace();
         }
     }
 
     private List<File> getFiles(){
         List<File>files = new ArrayList<>();
         try {
-            File folder = new File("D:\\btc160\\data\\blocks");
+            File folder = new File("D:\\btc151\\data\\blocks");
             File[] listOfFiles = folder.listFiles();
             if(listOfFiles==null)return files;
 
